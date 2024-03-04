@@ -1,0 +1,18 @@
+export const images = [
+	'https://images.prismic.io/getdiversified/28a28c85-4120-43b2-975a-6f3021d687fb_Watch.png?auto=compress,format',
+	'https://images.prismic.io/getdiversified/984fbbf0-0cdd-4657-902b-47fa2bdb5e1c_Frame.png?auto=compress,format',
+	'https://images.prismic.io/getdiversified/e70edc23-09b5-4ef1-83f9-9d665a7675e7_Car.png?auto=compress,format',
+	'https://images.prismic.io/getdiversified/4aae2f25-cac5-401a-bfd5-16917b5fd838_bottles.png?auto=compress,format',
+	'https://images.prismic.io/getdiversified/24c54308-2a3c-4d76-8f5b-7e8fba3649f3_Cave.png?auto=compress,format',
+	'https://images.prismic.io/getdiversified/65c65bc7-43bc-4a5c-ac8f-dec44ef52305_foot.png?auto=compress,format',
+	'https://images.prismic.io/getdiversified/e67d96eb-19dc-47f2-bc67-aaaaee06aaac_watch3.png?auto=compress,format',
+	'https://images.prismic.io/getdiversified/5344f2b6-ca9e-4f34-96a4-4b77ab303d52_music.png?auto=compress,format',
+	'https://images.prismic.io/getdiversified/ddcda44c-f17c-44bf-ba34-5a273909d193_seatcar.png?auto=compress,format',
+	'https://images.prismic.io/getdiversified/11af8892-7c25-4747-a820-20edce8537a3_Watch2.png?auto=compress,format',
+	'https://images.prismic.io/getdiversified/9397cff3-a6de-4078-a094-f82b50257fa7_alcool.png?auto=compress,format',
+	'https://images.prismic.io/getdiversified/174a0dc9-6bed-4a42-bc91-e169dd4c0ad9_bag+orange.png?auto=compress,format',
+	'https://images.prismic.io/getdiversified/7cdebb22-506b-4cf6-b9f8-c16c27dab8c2_wine2.png?auto=compress,format',
+	'https://images.prismic.io/getdiversified/f2b2f80b-d20f-4b96-b9ce-fa57f5126e4a_carback2.png?auto=compress,format',
+	'https://images.prismic.io/getdiversified/11af8892-7c25-4747-a820-20edce8537a3_Watch2.png?auto=compress,format',
+	'https://images.prismic.io/getdiversified/00f38f36-4e00-4a80-959b-5755cc8d3ec4_Carback.png?auto=compress,format',
+];

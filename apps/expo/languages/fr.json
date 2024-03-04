@@ -1,0 +1,9 @@
+{
+  "CFBundleDisplayName": "Diversified",
+  "NSFaceIDUsageDescription": "Nous utilisons Face ID pour déverrouiller l'application.",
+  "NSPhotoLibraryUsageDescription": "Diversified a besoin d'accéder à votre photothèque pour télécharger vos documents d'identité.",
+  "NSCameraUsageDescription": "Diversified a besoin d'un accès à votre appareil photo pour prendre des photos de vos documents d'identité.",
+  "NSLocationAlwaysAndWhenInUseUsageDescription": "Diversified a besoin d'accéder à votre localisation pour sécuriser l'accès à votre compte.",
+  "NSLocationAlwaysUsageDescription": "Diversified a besoin d'accéder à votre localisation pour sécuriser l'accès à votre compte.",
+  "NSLocationWhenInUseUsageDescription": "Diversified a besoin d'accéder à votre localisation pour sécuriser l'accès à votre compte."
+}

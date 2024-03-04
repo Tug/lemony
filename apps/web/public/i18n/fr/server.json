@@ -1,0 +1,22 @@
+{
+  "Error returned from our payment service provider": "Erreur renvoyée par notre fournisseur de services de paiement.",
+  "Fund transfer failed": {
+    " Please start over": "Le transfert de fonds a échoué. Veuillez recommencer"
+  },
+  "Order failed, please try again": "La commande a échoué, veuillez réessayer.",
+  "Order is already confirmed": "La commande est déjà confirmée.",
+  "Project does not have a mango account for payment": "Le projet n'a pas de compte mango pour le paiement",
+  "Project is fully sold out": "Le projet est entièrement vendu.",
+  "Project is not yet ready for sale": "Le projet n'est pas encore prêt à être vendu.",
+  "Retrying": "Nouvelle tentative...",
+  "The amount of token left for sale is less than the amount you ordered": {
+    " Do you wish to buy all that is available? (Currently remaining: {{amountLeft}})": "Le montant de jetons restant à vendre est inférieur au montant que vous avez commandé. Souhaitez-vous acheter tout ce qui est disponible ? (Actuellement restant : {{amountLeft}})"
+  },
+  "The minimum accepted amount is {{min_amount}}": "Le montant minimum accepté est {{min_amount}}",
+  "Your account is unverified": {
+    " Please follow the KYC procedure before investing": "Votre compte n'est pas vérifié. Veuillez suivre la procédure KYC avant d'investir."
+  },
+  "You must invest at least {{amount}}": "Vous devez investir au moins {{amount}}",
+  "Minimum amount by credit card is {{amount}}": "Le montant minimum par carte de crédit est de {{amount}}",
+  "Maximum amount by credit card is {{amount}}": "Le montant maximum par carte de crédit est de {{amount}}"
+}

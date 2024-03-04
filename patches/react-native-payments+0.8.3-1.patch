@@ -1,0 +1,51 @@
+diff --git a/node_modules/react-native-payments/android/build.gradle b/node_modules/react-native-payments/android/build.gradle
+index 4b5506b..f7716d7 100644
+--- a/node_modules/react-native-payments/android/build.gradle
++++ b/node_modules/react-native-payments/android/build.gradle
+@@ -1,18 +1,25 @@
+ apply plugin: 'com.android.library'
+ 
+-android {
+-    compileSdkVersion 28
+-    buildToolsVersion "28.0.3"
++def DEFAULT_COMPILE_SDK_VERSION = 31
++def DEFAULT_MIN_SDK_VERSION = 21
++def DEFAULT_TARGET_SDK_VERSION = 31
++
++def safeExtGet(prop, fallback) {
++    rootProject.ext.has(prop) ? rootProject.ext.get(prop) : fallback
++}
+ 
++android {
++    compileSdkVersion safeExtGet('compileSdkVersion', DEFAULT_COMPILE_SDK_VERSION)
+     defaultConfig {
+-        minSdkVersion 21
+-        targetSdkVersion 28
++        minSdkVersion safeExtGet('minSdkVersion', DEFAULT_MIN_SDK_VERSION)
++        targetSdkVersion safeExtGet('targetSdkVersion', DEFAULT_TARGET_SDK_VERSION)
+         versionCode 1
+         versionName "1.0"
+         ndk {
+             abiFilters "armeabi-v7a", "x86"
+         }
+     }
++
+     lintOptions {
+        warning 'InvalidPackage'
+     }
+diff --git a/node_modules/react-native-payments/ios/ReactNativePayments.h b/node_modules/react-native-payments/ios/ReactNativePayments.h
+index 3552b71..eff0921 100644
+--- a/node_modules/react-native-payments/ios/ReactNativePayments.h
++++ b/node_modules/react-native-payments/ios/ReactNativePayments.h
+@@ -2,11 +2,7 @@
+ @import PassKit;
+ @import AddressBook;
+ 
+-#if __has_include("RCTBridgeModule.h")
+-#import "RCTBridgeModule.h"
+-#else
+ #import <React/RCTBridgeModule.h>
+-#endif
+ 
+ #import "GatewayManager.h"
+ 

@@ -1,0 +1,23 @@
+{
+  "name": "@diversifiedfinance/serverless-polling",
+  "private": true,
+  "version": "1.0.0",
+  "scripts": {
+    "dev:invoke-1d:local": "serverless invoke local --function lemonypoller-daily-5am",
+    "dev:invoke-1d:prod": "serverless invoke --function lemonypoller-daily-5am",
+    "dev:run": "NEXT_API_URL=http://localhost:3000/api node index.js",
+    "deploy": "serverless deploy --stage production",
+    "logs": "yarn logs-10s && yarn logs-1m && yarn logs-20m && yarn logs-1d",
+    "logs-10s": "serverless logs -f lemonypoller-10s --stage production",
+    "logs-1m": "serverless logs -f lemonypoller-1m --stage production",
+    "logs-20m": "serverless logs -f lemonypoller-20m --stage production",
+    "logs-1d": "serverless logs -f lemonypoller-daily-5am --stage production",
+    "logs-10s:tail": "serverless logs -f lemonypoller-10s -t --stage production",
+    "clean": "sls remove --stage production"
+  },
+  "devDependencies": {
+    "serverless": "^3.0.0",
+    "serverless-step-functions": "^3.0.0",
+    "serverless-step-functions-offline": "^2.1.4"
+  }
+}

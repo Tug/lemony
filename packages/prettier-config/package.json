@@ -1,0 +1,31 @@
+{
+	"name": "@diversifiedfinance/prettier-config",
+	"version": "1.0.0",
+	"private": true,
+	"description": "Diversified Prettier shared configuration.",
+	"author": "Diversified Finance",
+	"repository": {
+		"type": "git",
+		"url": "https://github.com/Tug/lemony.git",
+		"directory": "packages/prettier-config"
+	},
+	"bugs": {
+		"url": "https://github.com/Tug/lemony/issues"
+	},
+	"engines": {
+		"node": ">=14"
+	},
+	"files": [
+		"lib/index.js"
+	],
+	"main": "lib/index.js",
+	"types": "build-types",
+	"devDependencies": {
+		"@trivago/prettier-plugin-sort-imports": "^3.3.0",
+		"prettier": "^2.8.7",
+		"prettier-plugin-tailwindcss": "0.2.5"
+	},
+	"peerDependencies": {
+		"prettier": ">=2"
+	}
+}

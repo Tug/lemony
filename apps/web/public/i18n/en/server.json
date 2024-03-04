@@ -1,0 +1,22 @@
+{
+  "Error returned from our payment service provider": "Error returned from our payment service provider.",
+  "Fund transfer failed": {
+    " Please start over": "Fund transfer failed. Please start over"
+  },
+  "Order failed, please try again": "Order failed, please try again",
+  "Order is already confirmed": "Order is already confirmed.",
+  "Project does not have a mango account for payment": "Project does not have a mango account for payment",
+  "Project is fully sold out": "Project is fully sold out.",
+  "Project is not yet ready for sale": "Project is not yet ready for sale.",
+  "Retrying": "Retrying",
+  "The amount of token left for sale is less than the amount you ordered": {
+    " Do you wish to buy all that is available? (Currently remaining: {{amountLeft}})": "The amount of token left for sale is less than the amount you ordered. Do you wish to buy all that is available? (Currently remaining: {{amountLeft}})"
+  },
+  "The minimum accepted amount is {{min_amount}}": "The minimum accepted amount is {{min_amount}}",
+  "Your account is unverified": {
+    " Please follow the KYC procedure before investing": "Your account is unverified. Please follow the KYC procedure before investing."
+  },
+  "You must invest at least {{amount}}": "You must invest at least {{amount}}",
+  "Minimum amount by credit card is {{amount}}": "Minimum amount by credit card is {{amount}}",
+  "Maximum amount by credit card is {{amount}}": "Maximum amount by credit card is {{amount}}"
+}

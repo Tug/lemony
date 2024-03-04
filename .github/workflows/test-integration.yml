@@ -1,0 +1,57 @@
+name: API Integration Test Suite
+
+defaults:
+  run:
+    working-directory: apps/web
+
+on:
+  pull_request:
+    paths:
+      - "package.json"
+      - "apps/web/*"
+      - "**/*.js"
+      - "**/*.jsx"
+      - "**/*.ts"
+      - "**/*.tsx"
+      - ".github/workflows/**"
+      - "**.patch"
+      - "**.lock"
+
+concurrency:
+  group: staging-${{ github.event_name }}-${{ github.ref }}
+
+jobs:
+  staging:
+    name: Run Integration Tests
+    runs-on: ubuntu-latest
+    steps:
+      - name: Set up repository
+        uses: actions/checkout@v3
+        with:
+          fetch-depth: 0 # 👈 Required to retrieve git history
+
+      - name: Set up Node
+        uses: actions/setup-node@v3
+        with:
+          node-version: 18.x
+
+      - name: Find yarn cache
+        id: yarn-cache-path
+        run: echo "dir=$(yarn cache dir)" >> $GITHUB_OUTPUT
+
+      - name: Restore cache
+        uses: actions/cache@v3
+        with:
+          path: ${{ steps.yarn-cache-path.outputs.dir }}
+          key: ${{ runner.os }}-yarn-${{ hashFiles('**/yarn.lock') }}
+          restore-keys: ${{ runner.os }}-yarn-
+
+      - name: Install dependencies
+        run: yarn install --immutable
+        env:
+          CI: TRUE
+
+      - name: Run tests
+        run: yarn test-ci
+        env:
+          CI: TRUE

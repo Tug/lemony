@@ -1,0 +1,1 @@
+export { useMagic } from './magic';

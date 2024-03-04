@@ -1,0 +1,5 @@
+apps/web @Tug
+apps/expo @Tug
+packages/app @Tug
+packages/design-system @Tug
+.github/workflows @Tug

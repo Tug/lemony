@@ -1,0 +1,20 @@
+{
+  "name": "@diversifiedfinance/serverless-word-to-pdf",
+  "version": "1.0.0",
+  "main": "src/index.js",
+  "author": "Diversified Finance",
+  "license": "MIT",
+  "private": true,
+  "dependencies": {
+    "@shelf/aws-lambda-libreoffice": "^5.0.3",
+    "aws-sdk": "^2.1359.0"
+  },
+  "scripts": {
+    "deploy": "serverless deploy"
+  },
+  "devDependencies": {
+    "serverless-iam-roles-per-function": "^3.2.0",
+    "serverless-localstack": "^1.0.6",
+    "serverless-step-functions": "^3.13.0"
+  }
+}

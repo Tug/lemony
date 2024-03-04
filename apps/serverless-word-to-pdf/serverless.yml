@@ -1,0 +1,80 @@
+service: word-to-pdf
+frameworkVersion: ">=2.24.0"
+
+provider:
+  name: aws
+  runtime: nodejs16.x
+  region: eu-west-3
+  stage: ${opt:stage, "dev"}
+  ecr:
+    images:
+      appimage:
+        path: ./
+  iam:
+    role:
+      statements:
+        - Effect: Allow
+          Action: 's3:ListBucket'
+          Resource: '*'
+        - Effect: Allow
+          Action:
+            - 's3:GetObject'
+            - 's3:PutObject'
+          Resource:
+            - 'arn:aws:s3:::diversified-docs/*'
+#      lambda-libreoffice-base:
+#        uri: public.ecr.aws/shelf/lambda-libreoffice-base:7.4-node16-x86_64
+
+plugins:
+#  - serverless-step-functions
+  - serverless-iam-roles-per-function
+
+# https://www.serverless.com/framework/docs/providers/aws/events/http-api
+functions:
+  convert:
+    image:
+      name: appimage
+    url: true
+#    url:
+#      authorizer: aws_iam
+#    handler: src/convert.handler
+#    events:
+#      - httpApi:
+#          method: '*'
+#          path: /convert
+
+#  StateMachineTrigger:
+#    handler: src/index.handler
+#    events:
+#      - s3:
+#          bucket: ${self:service}-${self:provider.stage}-upload-bucket
+#          event: s3:ObjectCreated:*
+#    environment:
+#      STATE_MACHINE_ARN: ${self:resources.Outputs.MyStateMachine.Value}
+#  convertWordToPDF:
+#    handler: src/convert.handler
+
+#    iamRoleStatements:
+#      - Effect: "Allow"
+#        Action:
+#          - states:*
+#        Resource: "*"
+
+#stepFunctions:
+#  stateMachines:
+#    MyStateMachine:
+#      id: MyStateMachine
+#      definition:
+#        StartAt: ConvertWordToPDF
+#        States:
+#          ConvertWordToPDF:
+#            Type: Pass
+#            Result: "Document converted"
+#            End: true
+#
+#resources:
+#  Outputs:
+#    MyStateMachine:
+#      Description: The ARN of the example state machine
+#      Value:
+#        Ref: MyStateMachine

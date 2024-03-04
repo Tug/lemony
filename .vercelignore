@@ -1,0 +1,11 @@
+README.md
+.expo
+.web
+.vscode
+node_modules
+apps/expo/node_modules
+apps/expo/.expo
+apps/expo/ios
+apps/expo/android
+apps/storybook-react/node_modules
+apps/storybook-react/.next

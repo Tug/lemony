@@ -1,0 +1,20 @@
+{
+  "name": "@diversifiedfinance/i18next-mmkv-backend",
+  "version": "1.0.2",
+  "description": "caching layer backend for i18next using mmkv storage",
+  "main": "./src/index.js",
+  "keywords": [
+    "i18next",
+    "i18next-backend"
+  ],
+  "homepage": "https://github.com/saqib-offneo/i18next-mmkv-backend",
+  "bugs": "https://github.com/saqib-offneo/i18next-mmkv-backend/issues",
+  "dependencies": {},
+  "peerDependencies": {
+    "react-native-mmkv": "*"
+  },
+  "author": [
+    "Saqib Majeed <saqib.majeed@offneo.com>"
+  ],
+  "license": "MIT"
+}

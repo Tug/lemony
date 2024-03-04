@@ -1,0 +1,71 @@
+{
+	"name": "@diversifiedfinance/eslint-plugin",
+	"version": "1.0.0",
+	"private": true,
+	"description": "ESLint plugin for Diversified development.",
+	"author": "Diversified Finance",
+	"keywords": [],
+	"repository": {
+		"type": "git",
+		"url": "https://github.com/Tug/lemony.git",
+		"directory": "packages/eslint-plugin"
+	},
+	"bugs": {
+		"url": "https://github.com/Tug/lemony/issues"
+	},
+	"engines": {
+		"node": ">=16",
+		"npm": ">=6.14.4"
+	},
+	"files": [
+		"configs",
+		"rules",
+		"utils",
+		"index.js"
+	],
+	"main": "index.js",
+	"dependencies": {
+		"@babel/eslint-parser": "^7.16.0",
+		"@types/react": "~18.2.14",
+		"@typescript-eslint/eslint-plugin": "^6.4.1",
+		"@typescript-eslint/parser": "^6.4.1",
+		"cosmiconfig": "^7.0.0",
+		"eslint": "^8.44.0",
+		"eslint-config-next": "^13.4.13",
+		"eslint-config-prettier": "^8.5.0",
+		"eslint-import-resolver-node": "0.3.4",
+		"eslint-plugin-diff": "^1.0.12",
+		"eslint-plugin-eslint-comments": "3.1.2",
+		"eslint-plugin-import": "^2.25.2",
+		"eslint-plugin-jest": "^25.2.3",
+		"eslint-plugin-jest-dom": "4.0.2",
+		"eslint-plugin-jsdoc": "^44.2.7",
+		"eslint-plugin-json": "^3.1.0",
+		"eslint-plugin-jsx-a11y": "^6.5.1",
+		"eslint-plugin-playwright": "0.8.0",
+		"eslint-plugin-prettier": "^4.0.0",
+		"eslint-plugin-react": "^7.27.0",
+		"eslint-plugin-react-hooks": "^4.3.0",
+		"eslint-plugin-ssr-friendly": "1.0.6",
+		"eslint-plugin-testing-library": "5.7.2",
+		"globals": "^13.12.0",
+		"lint-staged": "^13.2.3",
+		"requireindex": "^1.2.0",
+		"turbo": "^1.10.7",
+		"typescript": "^5.1.6"
+	},
+	"peerDependencies": {
+		"@babel/core": "*",
+		"eslint": "*",
+		"prettier": "*",
+		"typescript": "*"
+	},
+	"peerDependenciesMeta": {
+		"prettier": {
+			"optional": true
+		},
+		"typescript": {
+			"optional": true
+		}
+	}
+}

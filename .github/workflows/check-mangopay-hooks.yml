@@ -1,0 +1,16 @@
+name: Check Mangopay Hooks
+
+on:
+  workflow_dispatch:
+
+env:
+  NEXT_API_URL: https://app.diversified.fi/api
+
+jobs:
+  build:
+    name: Run Script
+    runs-on: ubuntu-latest
+    steps:
+      - name: Run Script
+        run: |
+          curl -X GET "$NEXT_API_URL/jobs/check-mangopay-hooks" -H "Authorization: Bearer ${{ secrets.API_SECRET_KEY }}"

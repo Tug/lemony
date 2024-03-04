@@ -1,0 +1,14 @@
+{
+	"name": "@diversifiedfinance/components",
+	"version": "0.0.0",
+	"private": true,
+	"main": "index.ts",
+	"dependencies": {},
+	"sideEffects": false,
+	"devDependencies": {},
+	"scripts": {
+		"lint": "eslint \"./**/*.{ts,tsx}\"",
+		"lint:fix": "eslint --fix \"./**/*.{ts,tsx}\"",
+		"lint:report": "eslint --output-file ../../lint-results/design-system.json --format json --fix \"./**/*.{ts,tsx}\""
+	}
+}

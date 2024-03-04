@@ -1,0 +1,72 @@
+diff --git a/node_modules/mangopay2-nodejs-sdk/lib/api.js b/node_modules/mangopay2-nodejs-sdk/lib/api.js
+index 387ce9f..6e85c16 100644
+--- a/node_modules/mangopay2-nodejs-sdk/lib/api.js
++++ b/node_modules/mangopay2-nodejs-sdk/lib/api.js
+@@ -22,6 +22,7 @@ function _getBasicAuthHash(username, apiKey) {
+ var Api = function(config) {
+     var defaultConfig = require('./config');
+     config = this.config = _.extend({}, defaultConfig, config);
++    requestOptions = this.requestOptions = {};
+ 
+     this.errorHandler = config.errorHandler;
+ 
+@@ -68,12 +69,6 @@ var Api = function(config) {
+ };
+ 
+ Api.prototype = {
+-    config: require('./config'),
+-
+-    requestOptions: {
+-        headers: {}
+-    },
+-
+     /**
+      * Checks if callback is a function or not, and passes the options
+      * @param {Object, Function}    callback
+@@ -193,8 +188,13 @@ Api.prototype = {
+                     .catch(reject)
+             } else if (response.statusCode < 200 || response.statusCode > 299) {
+                 if (_.isFunction(callback)) callback(resolveArgument, response);
+-                self.errorHandler(data.Message, data);
+-                reject(resolveArgument, response);
++                self.errorHandler(data.Message, data, requestOptions);
++                reject(resolveWithFullResponse ? resolveArgument : {
++                    message: data.Message,
++                    requestOptions,
++                    response,
++                    data,
++                }, response);
+             } else {
+                 setRateLimits(self, response.headers);
+                 if (['post', 'get', 'put'].indexOf(method) === -1) {
+@@ -222,7 +222,7 @@ Api.prototype = {
+                 }
+                 resolve(resolveArgument);
+             }
+-          }).on('error', function (err) { reject(err.message); });
++          }).on('error', reject);
+       });
+     },
+ 
+@@ -294,7 +294,7 @@ Api.prototype = {
+                 } else {
+                     reject(data);
+                 }
+-            }).on('error', function (err) { reject(err.message) });
++            }).on('error', reject);
+         });
+     },
+ 
+diff --git a/node_modules/mangopay2-nodejs-sdk/typings/base.d.ts b/node_modules/mangopay2-nodejs-sdk/typings/base.d.ts
+index feb0f34..42538c2 100644
+--- a/node_modules/mangopay2-nodejs-sdk/typings/base.d.ts
++++ b/node_modules/mangopay2-nodejs-sdk/typings/base.d.ts
+@@ -57,7 +57,7 @@ export namespace base {
+          * Set a custom error handler
+          * @default `console.error`
+          */
+-        errorHandler?(options: any, err: any): void;
++        errorHandler?(message: string, err: any, requestOptions: RequestOptions): void;
+     }
+ 
+     interface RequestOptions {

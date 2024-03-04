@@ -1,0 +1,44 @@
+name: Sync Projects
+
+defaults:
+  run:
+    working-directory: apps/web
+
+on:
+  workflow_dispatch:
+
+env:
+  NEXT_API_URL: https://staging.app.diversified.fi/api
+
+jobs:
+  build:
+    name: Run Script
+    runs-on: ubuntu-latest
+    steps:
+      - name: Set up repository
+        uses: actions/checkout@v3
+        with:
+          fetch-depth: 0 # 👈 Required to retrieve git history
+
+      - name: Set up Node
+        uses: actions/setup-node@v3
+        with:
+          node-version: 18.x
+          cache: 'yarn'
+
+      - name: Install dependencies
+        run: yarn install --immutable
+        env:
+          CI: TRUE
+
+      - name: Sync Products
+        run: |
+          curl -X GET "$NEXT_API_URL/jobs/sync-products" -H "Authorization: Bearer ${{ secrets.API_SECRET_KEY }}"
+
+      - name: Sync projects
+        env:
+          API_SECRET_KEY: ${{ secrets.API_SECRET_KEY }}
+          CI: TRUE
+        run: yarn ts-node scripts/sync-projects.ts
+
+

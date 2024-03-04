@@ -1,0 +1,116 @@
+org: diversified
+app: lemony-polling
+service: lemony-polling
+
+variablesResolutionMode: 20210326
+
+frameworkVersion: '>=2'
+
+plugins:
+  - serverless-step-functions
+#  - serverless-step-functions-offline
+
+provider:
+  name: aws
+  stage: ${opt:stage, 'dev'}
+  runtime: nodejs14.x
+  lambdaHashingVersion: 20201221
+  region: eu-west-3
+  timeout: 300
+
+functions:
+  lemonypoller-10s:
+    handler: index.every10s
+    # TODO NEXT: upload prod config to s3:
+    #  https://medium.com/@hussain94aa/serverless-managing-config-for-different-environments-with-s3-and-bash-scripts-ebe6f959a7e9
+    environment: ${file(env.${opt:stage, self:provider.stage}.json)}
+    timeout: 60
+  lemonypoller-1m:
+    handler: index.everyMinute
+    environment: ${file(env.${opt:stage, self:provider.stage}.json)}
+  lemonypoller-20m:
+    handler: index.every20Minutes
+    environment: ${file(env.${opt:stage, self:provider.stage}.json)}
+    timeout: 300
+  lemonypoller-daily-5am:
+    handler: index.everyDayAt5am
+    environment: ${file(env.${opt:stage, self:provider.stage}.json)}
+    timeout: 900
+
+stepFunctions:
+  stateMachines:
+    dailyAt5am:
+      events:
+        - schedule:
+            rate: cron(0 5 * * ? *)
+      name:
+        dailyAt5am
+      definition:
+        StartAt: Invoke Function
+        States:
+          Invoke Function:
+            Type: Task
+            Resource:
+              Fn::GetAtt: [ lemonypoller-daily-5am, Arn ]
+            End: true
+    every20minutes:
+      events:
+        - schedule:
+            rate: rate(20 minutes)
+      name:
+        every20minutes
+      definition:
+        StartAt: Invoke Function
+        States:
+          Invoke Function:
+            Type: Task
+            Resource:
+              Fn::GetAtt: [ lemonypoller-20m, Arn ]
+            End: true
+    everyMinute10s:
+      type: EXPRESS
+      events:
+        - schedule:
+            rate: rate(1 minute)
+      name:
+        everyMinute10s
+      definition:
+        StartAt: Create Loop Items
+        States:
+          Create Loop Items:
+            Type: Pass
+            Next: Loop
+            Result:
+              items: [ 1, 2, 3, 4, 5, 6 ]
+          Loop:
+            Type: Map
+            ItemsPath: "$.items"
+            MaxConcurrency: 1
+            Iterator:
+              StartAt: Wait 10 Seconds
+              States:
+                Wait 10 Seconds:
+                  Type: Wait
+                  Seconds: 10
+                  Next: Invoke 10s Function
+                Invoke 10s Function:
+                  Type: Task
+                  Resource:
+                    Fn::GetAtt: [ lemonypoller-10s, Arn ]
+                  End: true
+            End: true
+    everyminute:
+      type: EXPRESS
+      events:
+        - schedule:
+            rate: rate(1 minute)
+      name:
+        everyMinute
+      definition:
+        StartAt: Invoke 1m Function
+        States:
+          Invoke 1m Function:
+            Type: Task
+            Resource:
+              Fn::GetAtt: [ lemonypoller-1m, Arn ]
+            End: true

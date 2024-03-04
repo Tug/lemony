@@ -1,0 +1,19 @@
+diff --git a/node_modules/@sumsub/react-native-mobilesdk-module/android/build.gradle b/node_modules/@sumsub/react-native-mobilesdk-module/android/build.gradle
+index a7da576..03aceeb 100644
+--- a/node_modules/@sumsub/react-native-mobilesdk-module/android/build.gradle
++++ b/node_modules/@sumsub/react-native-mobilesdk-module/android/build.gradle
+@@ -116,12 +116,12 @@ afterEvaluate { project ->
+     }
+ 
+     task androidJavadocJar(type: Jar, dependsOn: androidJavadoc) {
+-        classifier = 'javadoc'
++        archiveClassifier.set("javadoc")
+         from androidJavadoc.destinationDir
+     }
+ 
+     task androidSourcesJar(type: Jar) {
+-        classifier = 'sources'
++        archiveClassifier.set("sources")
+         from android.sourceSets.main.java.srcDirs
+         include '**/*.java'
+     }

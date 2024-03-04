@@ -1,0 +1,7 @@
+{
+	"name": "@types/diversifiedfinance-typings",
+	"version": "1.0.0",
+	"private": true,
+	"main": "",
+	"types": "index.d.ts"
+}

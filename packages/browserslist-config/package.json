@@ -1,0 +1,23 @@
+{
+	"name": "@diversifiedfinance/browserslist-config",
+	"version": "5.5.0",
+	"private": true,
+	"description": "WordPress Browserslist shared configuration.",
+	"author": "Diversified Finance",
+	"homepage": "https://github.com/Tug/lemony/tree/HEAD/packages/browserslist-config/README.md",
+	"repository": {
+		"type": "git",
+		"url": "https://github.com/Tug/lemony.git",
+		"directory": "packages/browserslist-config"
+	},
+	"bugs": {
+		"url": "https://github.com/Tug/lemony/issues"
+	},
+	"engines": {
+		"node": ">=16"
+	},
+	"files": [
+		"index.js"
+	],
+	"main": "index.js"
+}

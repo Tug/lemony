@@ -1,0 +1,21 @@
+version: '3.6'
+services:
+    cockroachdbtest:
+        platform: linux/amd64
+        image: prismagraphql/cockroachdb-custom:22.2
+        restart: unless-stopped
+        volumes:
+            - db_data_test:/cockroach/cockroach-data
+        command: start-single-node --insecure
+        ports:
+            - "26258:26257"
+            - "29080:8080"
+        networks:
+            - lemony-test-network
+
+volumes:
+    db_data_test:
+
+networks:
+    lemony-test-network:
+        driver: bridge

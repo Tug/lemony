@@ -1,0 +1,2 @@
+-- AlterTable
+ALTER TABLE "companies" ADD COLUMN     "type" STRING NOT NULL DEFAULT 'BUSINESS';

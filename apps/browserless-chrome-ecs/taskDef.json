@@ -1,0 +1,66 @@
+{
+  "family": "browserless-chrome",
+  "networkMode": "awsvpc",
+  "containerDefinitions": [
+    {
+      "name": "browserless-chrome",
+      "image": "docker.io/browserless/chrome:latest",
+      "cpu": 0,
+      "portMappings": [
+        {
+          "containerPort": 80,
+          "hostPort": 80,
+          "protocol": "tcp",
+          "name": "browserless-chrome-80-tcp",
+          "appProtocol": "http"
+        },
+        {
+          "containerPort": 8080,
+          "hostPort": 8080,
+          "protocol": "tcp",
+          "name": "browserless-chrome-8080-tcp",
+          "appProtocol": "http"
+        },
+        {
+          "containerPort": 3000,
+          "hostPort": 3000,
+          "protocol": "tcp",
+          "name": "browserless-chrome-3000-tcp"
+        }
+      ],
+      "essential": true,
+      "environment": [
+        {
+          "name": "TOKEN",
+          "value": "REDACTED"
+        },
+        {
+          "name": "DEFAULT_LAUNCH_ARGS",
+          "value": "[\"--proxy-server=REDACTED:8118\"]"
+        },
+        {
+          "name": "DEFAULT_HEADLESS",
+          "value": "false"
+        },
+        {
+          "name": "DEFAULT_STEALTH",
+          "value": "true"
+        },
+        {
+          "name": "DEFAULT_BLOCK_ADS",
+          "value": "true"
+        }
+      ],
+      "environmentFiles": [],
+      "mountPoints": [],
+      "volumesFrom": []
+    }
+  ],
+  "volumes": [],
+  "placementConstraints": [],
+  "requiresCompatibilities": [
+    "FARGATE"
+  ],
+  "cpu": "1024",
+  "memory": "4096"
+}

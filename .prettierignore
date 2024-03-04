@@ -1,0 +1,11 @@
+node_modules
+apps/*/node_modules
+apps/expo/.expo
+apps/expo/ios
+apps/expo/android
+packages/*/node_modules
+.yarn
+.vercel
+.expo
+.next
+.turbo

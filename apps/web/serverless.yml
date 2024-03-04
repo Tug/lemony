@@ -1,0 +1,5 @@
+#
+#lemony-web:
+#  component: "@sls-next/serverless-component@3.7.0"
+#  inputs:
+#    domain: ["staging.lemony.fi", "lemony.fi"]

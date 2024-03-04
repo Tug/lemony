@@ -1,0 +1,108 @@
+{
+  "build": {
+    "production": {
+      "node": "18.18.0",
+      "channel": "production",
+      "distribution": "store",
+      "ios": {
+        "image": "latest",
+        "resourceClass": "m-large"
+      },
+      "android": {
+        "buildType": "app-bundle",
+        "image": "latest",
+        "resourceClass": "large"
+      },
+      "env": {
+        "STAGE": "production",
+        "NODE_ENV": "production",
+        "FLIPPER_DISABLE": "1",
+        "EX_UPDATES_ANDROID_DELAY_LOAD_APP": "false"
+      },
+      "prebuildCommand": "prebuild --skip-dependency-update react"
+    },
+    "preview": {
+      "node": "18.17.0",
+      "channel": "staging",
+      "distribution": "internal",
+      "ios": {
+        "image": "latest",
+        "resourceClass": "m-large"
+      },
+      "android": {
+        "buildType": "apk",
+        "image": "latest",
+        "resourceClass": "large"
+      },
+      "env": {
+        "EXPO_NO_DOTENV": "1",
+        "STAGE": "staging",
+        "NODE_ENV": "production",
+        "FLIPPER_DISABLE": "1",
+        "EX_UPDATES_ANDROID_DELAY_LOAD_APP": "false"
+      },
+      "prebuildCommand": "prebuild --skip-dependency-update react",
+      "cache": {
+        "key": "lemony-5"
+      }
+    },
+    "development": {
+      "node": "18.17.0",
+      "developmentClient": true,
+      "distribution": "internal",
+      "ios": {
+        "image": "latest",
+        "resourceClass": "m-large"
+      },
+      "android": {
+        "image": "latest",
+        "resourceClass": "large"
+      },
+      "env": {
+        "STAGE": "development",
+        "EX_UPDATES_ANDROID_DELAY_LOAD_APP": "false"
+      },
+      "prebuildCommand": "prebuild --skip-dependency-update react",
+      "cache": {
+        "key": "lemony-5"
+      },
+      "channel": "development"
+    },
+    "simulator": {
+      "node": "18.17.0",
+      "ios": {
+        "simulator": true,
+        "image": "latest",
+        "resourceClass": "m-medium"
+      },
+      "android": {
+        "image": "latest"
+      },
+      "env": {
+        "STAGE": "staging",
+        "NODE_ENV": "development",
+        "EX_UPDATES_ANDROID_DELAY_LOAD_APP": "false"
+      },
+      "prebuildCommand": "prebuild --skip-dependency-update react",
+      "cache": {
+        "key": "lemony-5"
+      },
+      "channel": "simulator"
+    }
+  },
+  "submit": {
+    "production": {
+      "android": {
+        "serviceAccountKeyPath": "./service-account-key.json"
+      },
+      "ios": {
+        "appName": "Diversified",
+        "ascAppId": "6446693590",
+        "appleId": "dekervit@gmail.com"
+      }
+    }
+  },
+  "cli": {
+    "version": ">= 0.52.0"
+  }
+}

@@ -1,0 +1,93 @@
+name: Expo Staging
+
+defaults:
+  run:
+    working-directory: apps/expo
+
+on:
+  push:
+    branches:
+      - staging
+  workflow_dispatch:
+
+concurrency:
+  group: staging-${{ github.event_name }}-${{ github.ref }}
+
+jobs:
+  staging:
+    name: Deploy Staging
+    runs-on: ubuntu-latest
+    steps:
+      - name: Set up repository
+        uses: actions/checkout@v3
+        with:
+          fetch-depth: 0 # 👈 Required to retrieve git history
+
+      - name: Set up Node
+        uses: actions/setup-node@v3
+        with:
+          node-version: 18.x
+          cache: 'yarn'
+
+      - name: Install dependencies
+        run: yarn install --immutable
+
+      - name: Set up Expo
+        uses: expo/expo-github-action@v7
+        with:
+          eas-version: latest
+          eas-cache: true
+          expo-cache: true
+          expo-version: 4.x
+          token: ${{ secrets.EXPO_TOKEN }}
+
+      # - name: EAS Update
+      #   run: NODE_OPTIONS=--max-old-space-size=5120 EXPO_DEBUG=true STAGE=staging eas update --branch staging --message "Deploy to staging"
+
+      - name: Build iOS on EAS
+        run: NODE_ENV=production STAGE=staging eas build --profile preview --platform ios --non-interactive --no-wait
+
+      - name: Get iOS link
+        id: ios-build-info
+        run: |
+          BUILD_ID=$(eas build:list --json --limit=1 --platform=ios --buildProfile=preview --non-interactive | jq --raw-output '.[0].id')
+          if [ "$BUILD_ID" == "" ]; then
+            exit 1
+          fi
+          echo "id=$BUILD_ID" >> $GITHUB_OUTPUT
+
+      - name: Send iOS link to Slack
+        env:
+          SLACK_WEBHOOK_URL: ${{ secrets.SLACK_WEBHOOK_URL }}
+          IOS_BUILD_URL: https://expo.dev/accounts/diversified/projects/lemony-mobile/builds/${{ steps.ios-build-info.outputs.id }}
+        uses: slackapi/slack-github-action@v1.24.0
+        with:
+          payload: |
+            {
+              "user": "Github Actions Bot",
+              "message": "Building a new iOS version: ${{ env.IOS_BUILD_URL }}"
+            }
+
+      - name: Build Android on EAS
+        run: NODE_ENV=production STAGE=staging eas build --profile preview --platform android --non-interactive --no-wait
+
+      - name: Get Android link
+        id: android-build-info
+        run: |
+          BUILD_ID=$(eas build:list --json --limit=1 --platform=android --buildProfile=preview --non-interactive | jq --raw-output '.[0].id')
+          if [ "$BUILD_ID" == "" ]; then
+            exit 1
+          fi
+          echo "id=$BUILD_ID" >> $GITHUB_OUTPUT
+
+      - name: Send Android link to Slack
+        env:
+          SLACK_WEBHOOK_URL: ${{ secrets.SLACK_WEBHOOK_URL }}
+          ANDROID_BUILD_URL: https://expo.dev/accounts/diversified/projects/lemony-mobile/builds/${{ steps.android-build-info.outputs.id }}
+        uses: slackapi/slack-github-action@v1.24.0
+        with:
+          payload: |
+            {
+              "user": "Github Actions Bot",
+              "message": "Building a new Android version: ${{ env.ANDROID_BUILD_URL }}"
+            }

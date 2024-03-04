@@ -1,0 +1,15 @@
+{
+  "$schema": "https://json.schemastore.org/tsconfig",
+  "display": "Default",
+  "extends": "expo/tsconfig.base",
+  "compilerOptions": {
+    "strict": true,
+    "module": "esnext",
+    "noUnusedLocals": true,
+    "paths": {
+      "@diversifiedfinance/*": [
+        "../../packages/*"
+      ]
+    }
+  }
+}

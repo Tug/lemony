@@ -1,0 +1,3 @@
+{
+	"extends": "@diversifiedfinance/tsconfig/base.json"
+}

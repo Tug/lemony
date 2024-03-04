@@ -1,0 +1,9 @@
+{
+	"name": "@diversifiedfinance/types",
+	"version": "1.0.0",
+	"private": true,
+	"main": "index.ts",
+	"devDependencies": {
+		"wp-types": "3.61.0"
+	}
+}

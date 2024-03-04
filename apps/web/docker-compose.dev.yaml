@@ -1,0 +1,45 @@
+version: '3.6'
+services:
+    web:
+        build: ../..
+        environment:
+            DATABASE_URL: postgresql://root@localhost:26257/defaultdb?sslmode=disable&connect_timeout=300&connection_limit=100000
+        ports:
+            - "3000:3000"
+        networks:
+            - lemony-dev-network
+    cockroachdb:
+        platform: linux/amd64
+        image: cockroachdb/cockroach:v23.1.12
+        restart: unless-stopped
+        volumes:
+            - db_data:/cockroach/cockroach-data
+        command: start-single-node --insecure
+        ports:
+            - "26257:26257"
+            - "28080:8080"
+        networks:
+            - lemony-dev-network
+    mailhog:
+        image: mailhog/mailhog
+        environment:
+            SMTP_HOST: mailhog
+            SMTP_PORT: 1025
+            SMTP_USER: user
+            SMTP_PASS: password
+            SMTP_SECURE: 'true'
+            SMTP_SENDER: admin@getdiversified.app
+        ports:
+            - 1025:1025 # smtp server
+            - 8025:8025 # web ui
+        volumes:
+            - ./docker/data/mailhog:/maildir
+        networks:
+            - lemony-dev-network
+
+volumes:
+    db_data:
+
+networks:
+    lemony-dev-network:
+        driver: bridge

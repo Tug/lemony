@@ -1,0 +1,48 @@
+import { useState } from 'react';
+
+import { View } from '@diversifiedfinance/design-system/view';
+
+import { Fieldset } from './index';
+
+export default {
+	component: Fieldset,
+	title: 'Components/Fieldset',
+};
+
+const options = [
+	{
+		value: 0,
+		label: 'Option A',
+	},
+	{
+		value: 1,
+		label: 'Option B',
+	},
+	{
+		value: 2,
+		label: 'Option C',
+	},
+];
+export const Primary = () => {
+	const [value, setValue] = useState(0);
+	return (
+		<View tw="flex-1 dark:bg-gray-300">
+			<Fieldset
+				errorText="hello world"
+				helperText="hello world"
+				placeholder="placeholder"
+			/>
+			<Fieldset
+				label="Default NFT List"
+				tw="mt-4"
+				selectOnly
+				select={{
+					options,
+					placeholder: 'Select',
+					value,
+					onChange: (e) => setValue(+e),
+				}}
+			/>
+		</View>
+	);
+};
