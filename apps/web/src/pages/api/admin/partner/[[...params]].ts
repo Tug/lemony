@@ -10,7 +10,9 @@ import {
 	SetHeader,
 } from 'next-api-decorators';
 import { exceptionHandler } from '../../../../lib/error';
+import RequiresAPIKEY from "../../../../helpers/api/requires-api-key";
 
+@RequiresAPIKEY()
 @Catch(exceptionHandler)
 class PartnerStatsHandler {
 	// GET /api/admin/partner/:id/stats
